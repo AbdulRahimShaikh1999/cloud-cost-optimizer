@@ -32,4 +32,11 @@ jobs:
         run: cd terraform && terraform plan -input=false -out=tfplan
 
       - name: Terraform Apply
-        run: cd terraform && terraform apply -input=false -auto-approve tfplan
+        run: |
+          cd terraform
+          terraform import aws_dynamodb_table.resource_tracker resource-tracker-staging
+          terraform import aws_iam_role.lambda_execution_role lambda-exec-staging
+          terraform import aws_s3_bucket.reports levelup-reports-staging
+          terraform import aws_s3_bucket.logs levelup-logs-staging
+          terraform import aws_s3_bucket.ai_summaries levelup-ai-summaries-staging
+          terraform apply -input=false -auto-approve tfplan
