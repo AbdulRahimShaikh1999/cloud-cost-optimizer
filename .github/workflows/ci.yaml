@@ -11,7 +11,7 @@ jobs:
 
     steps:
 
-        
+
       - name: Checkout repo
         uses: actions/checkout@v4
 
@@ -30,6 +30,8 @@ jobs:
           IMAGE_TAG=${{ github.sha }}
           for FUNC in scanner action ai_insights; do
             if [ "$FUNC" = "ai_insights" ]; then
+              docker build -t ai_insights-lambda ./lambdas/ai_insights
+              docker tag ai_insights-lambda 982081047984.dkr.ecr.us-east-1.amazonaws.com/ai-insights-lambda:$IMAGE_TAG
               docker push 982081047984.dkr.ecr.us-east-1.amazonaws.com/ai-insights-lambda:$IMAGE_TAG
             else
               echo "Skipping $FUNC"
