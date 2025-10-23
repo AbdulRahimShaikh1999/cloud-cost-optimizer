@@ -27,7 +27,12 @@ jobs:
         run: |
           IMAGE_TAG=${{ github.sha }}
           for FUNC in scanner action ai_insights; do
-            docker build -t $FUNC-lambda ./lambdas/$FUNC
-            docker tag $FUNC-lambda:latest 982081047984.dkr.ecr.us-east-1.amazonaws.com/$FUNC-lambda:$IMAGE_TAG
-            docker push 982081047984.dkr.ecr.us-east-1.amazonaws.com/$FUNC-lambda:$IMAGE_TAG
+            if [ "$FUNC" = "ai_insights" ]; then
+              docker push 982081047984.dkr.ecr.us-east-1.amazonaws.com/ai-insights-lambda:$IMAGE_TAG
+            else
+              echo "Skipping $FUNC"
+              docker build -t $FUNC-lambda ./lambdas/$FUNC
+              docker tag $FUNC-lambda:latest 982081047984.dkr.ecr.us-east-1.amazonaws.com/$FUNC-lambda:$IMAGE_TAG
+              docker push 982081047984.dkr.ecr.us-east-1.amazonaws.com/$FUNC-lambda:$IMAGE_TAG
+            fi
           done
