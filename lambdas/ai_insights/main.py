@@ -64,6 +64,8 @@ def lambda_handler(event, context):
         obj = s3.get_object(Bucket=S3_BUCKET, Key=key)
         summaries.append(obj["Body"].read().decode("utf-8"))
 
+
+
     # Build prompt
     prompt = (
         "You are a cloud cost optimization assistant.\n"
