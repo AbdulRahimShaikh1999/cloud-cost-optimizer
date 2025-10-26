@@ -9,6 +9,8 @@ resource "aws_dynamodb_table" "resource_tracker" {
     type = "S"
   }
 
+
+
   attribute {
     name = "timestamp"
     type = "S"
