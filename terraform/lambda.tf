@@ -42,6 +42,10 @@ resource "aws_lambda_function" "ai-insights" {
       DDB_TABLE = aws_dynamodb_table.resource_tracker.name
       S3_BUCKET = aws_s3_bucket.reports.bucket
       ENV       = var.environment
+      SNS_TOPIC_ARN           = aws_sns_topic.ai_summaries_topic.arn
+      MODEL_ID                = "amazon.titan-text-lite-v1"
+      SUMMARY_TOP_N           = "10"
+      SUMMARY_RECENCY_WINDOW  = "7"
     }
   }
 }

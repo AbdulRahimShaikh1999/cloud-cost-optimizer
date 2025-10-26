@@ -11,3 +11,22 @@ resource "aws_iam_role" "lambda_execution_role" {
     }]
   })
 }
+
+resource "aws_iam_role_policy" "lambda_bedrock_policy" {
+  name = "lambda-bedrock-policy-${var.environment}"
+  role = aws_iam_role.lambda_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "bedrock:InvokeModel"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
