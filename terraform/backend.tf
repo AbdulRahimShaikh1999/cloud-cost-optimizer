@@ -6,4 +6,5 @@ terraform {
     dynamodb_table = "terraform-backend-cloud-cost-optimizer"
     encrypt        = true
   }
+  
 }
