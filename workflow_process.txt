@@ -1,0 +1,16 @@
+workflow order to avoid github actions + terraform state issue
+
+1. Pull latest changes
+git pull origin main
+
+2. Validate your Terraform changes
+cd terraform
+terraform fmt -check
+terraform validate
+terraform plan
+(optional) just to preview what will happen
+
+3. Commit changes
+git add .
+git commit -m "Added X resource"
+git push origin main
