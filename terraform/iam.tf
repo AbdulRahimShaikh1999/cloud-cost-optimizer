@@ -72,3 +72,25 @@ resource "aws_iam_role_policy" "lambda_exec_staging_policy" {
     ]
   })
 }
+
+
+resource "aws_iam_role_policy" "lambda_put_metric_policy" {
+  name = "lambda-put-metric-${var.environment}"
+  role = aws_iam_role.lambda_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = ["cloudwatch:PutMetricData"],
+        Resource = "*",
+        Condition = {
+          StringEquals = {
+            "cloudwatch:namespace": "CloudCostOptimizer"
+          }
+        }
+      }
+    ]
+  })
+}
