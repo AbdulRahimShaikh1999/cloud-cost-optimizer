@@ -10,6 +10,8 @@ resource "aws_lambda_function" "scanner" {
       DDB_TABLE = aws_dynamodb_table.resource_tracker.name
       S3_BUCKET = aws_s3_bucket.reports.bucket
       ENV       = var.environment
+      METRICS_NAMESPACE = "CloudCostOptimizer"
+
     }
   }
 }
@@ -26,6 +28,8 @@ resource "aws_lambda_function" "action" {
       DDB_TABLE = aws_dynamodb_table.resource_tracker.name
       S3_BUCKET = aws_s3_bucket.reports.bucket
       ENV       = var.environment
+      METRICS_NAMESPACE = "CloudCostOptimizer"
+
     }
   }
 }
@@ -46,6 +50,8 @@ resource "aws_lambda_function" "ai-insights" {
       MODEL_ID                = "amazon.titan-text-lite-v1"
       SUMMARY_TOP_N           = "10"
       SUMMARY_RECENCY_WINDOW  = "7"
+      METRICS_NAMESPACE = "CloudCostOptimizer"
     }
   }
 }
+

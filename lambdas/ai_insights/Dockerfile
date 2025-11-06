@@ -2,7 +2,7 @@ FROM public.ecr.aws/lambda/python:3.12
 
 # Copy function code
 COPY main.py ${LAMBDA_TASK_ROOT}
-COPY requirements.txt ./
+COPY requirements.txt .
 
 # Install dependencies
 RUN pip install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
