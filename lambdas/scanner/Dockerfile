@@ -7,4 +7,5 @@ COPY requirements.txt ./
 # Install dependencies
 RUN pip install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 
+
 CMD ["main.lambda_handler"]
