@@ -51,6 +51,7 @@ resource "aws_lambda_function" "ai-insights" {
       SUMMARY_TOP_N           = "10"
       SUMMARY_RECENCY_WINDOW  = "7"
       METRICS_NAMESPACE = "CloudCostOptimizer"
+      
     }
   }
 }
